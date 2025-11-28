@@ -1,0 +1,253 @@
+InformeSistema de Gestión de Atención al Cliente 
+
+INFORMACIÓN GENERAL
+Autores: Juan Ángel Bettin Toloza, Juan Camilo Navarro Acosta, Francisco Javier Meza Trujillo
+Profesor: Alberto Manuel Paternina León
+Fecha: Noviembre 2025 - Programación 2
+
+OBJETIVOS
+Objetivo General
+Diseñar e implementar un sistema de gestión de atención al cliente integrando estructuras de datos fundamentales (Cola, Lista y Pila) para administrar eficientemente el flujo de atención, el registro histórico y la reversión de operaciones mediante POO.
+Objetivos Específicos
+
+Implementar cola (Queue) con ArrayDeque para gestión FIFO
+Desarrollar lista enlazada (LinkedList) para historial completo con información temporal
+Incorporar pila (Stack) para registro de operaciones y trazabilidad
+Diseñar mecanismo de reversión de acciones (deshacer última operación)
+Aplicar patrón MVC para separación de responsabilidades
+Crear vista intuitiva para interacción con las tres estructuras de datos
+
+
+TECNOLOGÍAS UTILIZADAS
+
+Lenguaje: Java
+Paradigma: Programación Orientada a Objetos (POO)
+Estructuras de datos: LinkedList, ArrayDeque, Stack
+Interfaz gráfica: Java Swing
+
+
+ARQUITECTURA DEL SISTEMA
+Patrón MVC (Modelo-Vista-Controlador)
+Diagrama: Muestra la interacción entre Usuario → Vista → Controlador → Modelo, con flujo bidireccional de datos entre componentes.
+Componentes:
+
+Vista: Interfaz gráfica con tres pestañas (Registro, Historial, Búsquedas)
+Modelo: Clases de gestión de estructuras de datos y lógica de negocio
+Controlador: Intermediario que gestiona peticiones e interacciones
+
+
+ESTRUCTURAS DE DATOS
+1. Cola de Espera (Queue) - FIFO
+
+Implementación: ArrayDeque<Cliente>
+Propósito: Gestionar flujo de clientes según orden de llegada
+Ventajas: Operaciones O(1) para inserción/eliminación, mejor rendimiento de memoria que LinkedList
+
+2. Lista de Atendidos (List) - Historial
+
+Implementación: LinkedList<Cliente>
+Propósito: Registro completo de clientes atendidos
+Características:
+
+Almacena hora entrada, salida y duración
+Permite análisis estadísticos
+Mantiene orden cronológico
+
+
+Complejidad: Inserción O(1), búsquedas O(n)
+
+3. Pila de Operaciones (Stack) - LIFO
+
+Implementación: Stack<Operacion>
+Propósito: Registrar acciones y permitir reversión (deshacer)
+Ventajas: Operaciones O(1), comportamiento LIFO natural
+
+
+
+
+FLUJO DE OPERACIONES DEL SISTEMA:
+El sistema implementa tres operaciones principales que interactúan con las estructuras de datos de manera coordinada:
+🔵 OPERACIÓN: AGREGAR
+Secuencia de pasos:
+
+Crear objeto Cliente
+
+Se capturan los datos del cliente: ID, nombre, tipo de consulta, prioridad de atención y hora de entrada al sistema
+
+
+Agregar a Cola de Espera
+
+El cliente es añadido al final de la cola según el principio FIFO (First In, First Out)
+
+
+Registrar en Pila
+
+Se crea un registro de la operación "AGREGAR" con toda la información del cliente y se almacena en la pila para trazabilidad y función deshacer
+
+
+
+
+🟢 OPERACIÓN: ATENDER
+Secuencia de pasos:
+
+Remover de Cola de Espera
+
+Se extrae el primer cliente de la cola (respetando el principio FIFO) que haya llegado primero o el atendido de mayor prioridad si lo hubiera
+
+
+Actualizar datos del cliente
+
+Se registra la hora de salida del sistema y se calcula automáticamente la duración total de la atención en minutos
+
+
+Agregar a Lista de Atendidos
+
+El cliente procesado se traslada al historial de atenciones completadas, conservando toda su información temporal
+
+
+Registrar en Pila
+
+Se crea un registro de la operación "ATENDER" indicando que el cliente fue movido de la cola a la lista de atendidos (afecta a ambas estructuras)
+
+
+
+
+🔴 OPERACIÓN: ELIMINAR
+Secuencia de pasos:
+
+Remover de Cola de Espera
+
+Se elimina el cliente seleccionado de la cola sin pasar por el estándar (por cancelación o abandono del cliente)
+
+
+Registrar en Pila
+
+Se crea un registro de la operación "ELIMINAR" guardando toda la información del cliente para poder restaurarlo si se ejecuta la función deshacer
+Operaciones principales:
+
+AGREGAR: Incorpora cliente a cola, registra datos y hora
+ATENDER: Procesa primer cliente, calcula tiempo y mueve a historial
+ELIMINAR: Remueve cliente sin atenderlo (cancelación/abandono)
+
+Sincronización:
+
+Cola → Pila: Cada modificación genera registro
+Cola → Lista: Clientes atendidos migran automáticamente
+Pila → Cola/Lista: Permite revertir cambios
+
+Invariantes:
+
+Cliente solo en cola O lista, nunca en ambas
+Toda operación debe registrarse en pila
+Tamaño de pila = número total de operaciones
+
+
+MECANISMO DE REVERSIÓN (DESHACER)
+Reversión por Tipo de Operación
+Revertir AGREGAR:
+
+Remueve cliente de cola
+Actualiza tabla
+Cliente eliminado de tabla de atención
+
+Revertir ATENDER:
+
+Cambia estado de cliente (atendido → no atendido)
+Restaura cliente a cola
+
+Revertir ELIMINAR:
+
+Agrega cliente eliminado de vuelta
+Actualiza tabla
+Cliente permanece en tabla de atención
+
+
+
+
+
+CLASES PRINCIPALES
+Paquete Modelo
+Clase Cliente:
+
+Atributos: ID, nombre, tipo solicitud, prioridad, hora llegada, hora salida, tiempo atención
+Métodos: Getters/setters, formato tiempo, toString, copia de atributos
+
+Clase Accion:
+
+Define tipos de acciones (agregar, eliminar, deshacer)
+
+Clase ColaClientes:
+
+Gestiona cola del sistema
+Organiza según prioridad (urgentes primero)
+Operaciones: agregar, eliminar, buscar
+
+Clase ListaAtendidos:
+
+Contiene usuarios atendidos
+Calcula promedio tiempo de atención
+Búsqueda por ID y tipo de solicitud
+
+Clase ModeloHelper:
+
+Validaciones de campos
+Verifica unicidad de ID
+Valida formato nombre (solo letras) y ID (solo números)
+
+Clase PilaAcciones:
+
+Estructura de pila de acciones
+Operaciones: apilar, desapilar, verificar vacía
+Obtiene traza inversa (orden inverso)
+
+Paquete Controlador
+Clase Controlador:
+
+Intermediario entre vista y modelo
+Eventos principales: agregar, atender, eliminar, deshacer, mostrarHistorial, mostrarEstadísticas, reiniciarDía, salir
+Eventos de búsqueda: buscarPorID, buscarPorTipo (soporte/mantenimiento/reclamo), mostrarTodos
+Validaciones de formato y actualización de tablas
+
+
+
+
+
+ANÁLISIS DE COMPLEJIDAD TEMPORAL
+ Muestra complejidades para operaciones principales:
+
+Agregar cliente: O(1)
+Atender cliente: O(1)
+Eliminar cliente: O(n)
+Deshacer operación: O(1)
+Buscar en historial: O(n)
+Mostrar estadísticas: O(n)
+
+
+
+
+FLUJO DE DATOS:
+el flujo completo desde la entrada de datos del cliente, pasando por la cola de espera, proceso de atención, hasta el historial final, con la pila de operaciones registrando cada acción en paralelo.
+
+FUNCIONALIDADES IMPLEMENTADAS
+Interfaz Principal
+
+Tres pestañas: Registro, Historial, Búsquedas
+Formulario de ingreso con campos validados
+Tablas actualizadas en tiempo real
+
+Sistema de Búsqueda
+
+Búsqueda por ID específico
+Filtrado por tipo (Soporte, Mantenimiento, Reclamo)
+Opción "Mostrar todos"
+
+Historial y Estadísticas
+
+Visualización de acciones realizadas
+Estadísticas de atención
+Promedio de tiempos
+Conteo por tipo de solicitud
+
+
+CONCLUSIÓN
+El sistema integra exitosamente tres estructuras de datos fundamentales (Cola, Lista, Pila) en una aplicación funcional que gestiona eficientemente la atención al cliente, mantiene historial completo y permite reversión de operaciones mediante patrón MVC y POO.

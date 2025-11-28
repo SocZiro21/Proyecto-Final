@@ -1,0 +1,112 @@
+Manual de Usuario
+Sistema de Gestión de Atención al Cliente - TechClassUC 
+
+1. Introducción
+Bienvenido al Sistema de Gestión de Atención al Cliente de TechClassUC. Este software le permite administrar eficientemente las solicitudes de soporte técnico, mantenimiento y reclamos de sus clientes, organizando la atención por orden de llegada y manteniendo un registro completo de todas las operaciones.  
+
+
+
+2. Inicio del Sistema
+Al abrir la aplicación, verá la interfaz principal con tres pestañas en la parte superior:
+•	Registro: Para gestionar la cola de clientes
+•	Historial y estadísticas: Para consultar clientes atendidos
+•	Búsquedas: Para localizar clientes específicos
+
+
+
+
+
+3. Pestaña "Registro" - Gestión de la Cola
+
+3.1 Agregar un Cliente
+
+1.	Complete los campos en la parte superior izquierda: 
+o	Coloque su id: Ingrese el código único del cliente (ej: 123)
+o	Coloque su nombre: Ingrese el nombre del cliente (ej: Juan)
+2.	En la parte derecha, seleccione: 
+o	Tipo de consulta: Elija entre Soporte, Mantenimiento o Reclamo
+o	Prioridad de la consulta: Seleccione Normal o Urgente
+3.	Haga clic en el botón "Agregar" para añadir el cliente a la cola de espera
+
+Resultado: El cliente aparecerá en la tabla izquierda con su información y hora de entrada.
+
+3.2 Atender un Cliente
+1.	El cliente en la parte superior de la cola (primero en llegar) será el próximo a atender
+2.	Haga clic en el botón "Atender"
+3.	El cliente se moverá automáticamente de la cola de espera a la tabla de atendidos (derecha)
+
+Nota: La tabla derecha muestra la hora de entrada, salida y duración de la atención.
+
+
+3.3 Eliminar un Cliente de la Cola
+Para eliminar a un cliente sigue las intrucciones:
+1.	Haga clic en el botón "Eliminar"
+2.	Ingrese el ID del cliente/usuario a eliminar
+3.	El cliente/usuario será removido de cualquiera de las dos tablas
+3.4 Deshacer Última Acción
+
+Si cometió un error en la última operación:
+1.	Haga clic en el botón "Deshacer"
+2.	El sistema revertirá la última acción realizada (agregar, atender o eliminar)
+3.	Los datos del cliente afectado serán restaurados
+
+
+
+
+4. Pestaña "Historial y estadísticas"
+
+Esta sección le permite visualizar información completa sobre la operación del sistema.
+
+4.1 Consultar Estadísticas Generales
+
+Al ingresar a esta pestaña podrá ver:
+•	Total de clientes atendidos en el día
+•	Tiempo promedio de atención
+•	Cantidad de clientes por tipo de solicitud
+•	Total de operaciones realizadas
+4.2 Ver Historial de Atenciones
+La tabla muestra todos los clientes que han sido atendidos con:
+•	ID y nombre del cliente
+•	Tipo de consulta 	  
+•	Prioridad
+•	Hora de entrada y salida
+•	Duración total de la atención
+
+4.3 Reiniciar para un nuevo día:
+Si desea reiniciar todo el programa use el botón “Reiniciar para un nuevo dia”, esto hace que se reinicia toda la información que se guardó en las tablas de cada pestaña.
+
+5. Pestaña "Búsquedas"
+5.1 Buscar Cliente por ID
+1.	Ingrese el ID del cliente en el campo "Coloque el id del cliente que quiere encontrar"
+2.	Haga clic en "Buscar por ID"
+3.	El sistema mostrará la información del cliente en la tabla inferior
+5.2 Buscar por Tipo de Solicitud
+•	Buscar los de soporte: Muestra todos los clientes con solicitudes de soporte
+•	Buscar los de mantenimiento: Muestra todos los clientes con solicitudes de mantenimiento
+•	Buscar los de reclamo: Muestra todos los clientes con solicitudes de reclamo
+5.3 Mostrar Todos los Clientes
+Haga clic en "Mostrar todos los clientes" para ver el historial completo de clientes atendidos.
+
+
+
+6. Flujo de Trabajo Típico
+
+Escenario 1: Atención Normal
+1.	Un cliente llega → Vaya a "Registro"
+2.	Complete sus datos (ID, nombre, tipo de consulta, prioridad)
+3.	Haga clic en "Agregar" → El cliente entra a la cola
+4.	Cuando llegue su turno → Haga clic en "Atender"
+5.	El cliente pasa a la tabla de atendidos automáticamente
+
+Escenario 2: Cliente Cancela
+
+1.	El cliente decide irse antes de ser atendido
+2.	Seleccione el cliente en la tabla de espera
+3.	Haga clic en "Eliminar"
+4.	Si fue un error → Use "Deshacer" para recuperarlo
+
+Escenario 3: Consulta de Historial
+1.	Vaya a "Historial y estadísticas"
+2.	Revise las métricas del día
+3.	Si necesita buscar un cliente específico → Vaya a "Búsquedas"
+4.	Use el ID o el tipo de solicitud para localizarlo
