@@ -1,5 +1,5 @@
 # Proyecto-Final
-Proyecto Final Programación II - Ingeniería de Sistemas tercer semestre Montería - Hecho por Francisco Javier Meza Trujillo, Juan Angel Bettin Tolosa, Juan Camilo Navarro Acosta
+Proyecto Final Programación II - Ingeniería de Sistemas tercer semestre Montería - Hecho por Francisco Javier Meza Trujillo, Juan Angel Bettin Toloza, Juan Camilo Navarro Acosta
 
 # Funcionamiento:
 <img width="921" height="411" alt="image" src="https://github.com/user-attachments/assets/e39dce53-5598-4009-a9f8-24378f8d382c" />
